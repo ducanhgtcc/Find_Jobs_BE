@@ -21,7 +21,7 @@ public class Company {
 	private String googleMap;
 	private String website;
 
-	@OneToOne
+	@ManyToOne
 	private Account account;
 
 	@ManyToMany
