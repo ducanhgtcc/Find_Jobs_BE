@@ -27,4 +27,8 @@ public class JobService {
     public ListJobCompanyAccount getOneJobbyID(int id) {
        return iJobRepo.joinCompanyAndJobAndAccountbyid(id);
     }
+    public List<ListJobCompanyAccount> searchByCompany(String short_name){
+        return iJobRepo.searchByCompany(short_name);
+
+    }
 }

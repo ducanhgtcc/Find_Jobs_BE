@@ -34,4 +34,9 @@ public class JobAPI {
     public ResponseEntity<ListJobCompanyAccount> getOneJob(@PathVariable int id){
         return new ResponseEntity<>(jobService.getOneJobbyID(id),HttpStatus.OK);
     }
+    @GetMapping("/searchCompany/{short_name}")
+    public ResponseEntity<List<ListJobCompanyAccount>> searchByCompany(@PathVariable String short_name ){
+
+        return new ResponseEntity<>(jobService.searchByCompany('%'+short_name+'%'),HttpStatus.OK);
+    }
 }
