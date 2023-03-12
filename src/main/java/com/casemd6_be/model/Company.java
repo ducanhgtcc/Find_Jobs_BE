@@ -22,9 +22,9 @@ public class Company {
 	private String googleMap;
 	private String website;
 
-	@OneToOne
+	@ManyToOne
 	private Account account;
 
-	@ManyToMany
-	private List<Category> category;
+//	@ManyToMany
+//	private List<Category> category;
 }
