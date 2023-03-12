@@ -1,6 +1,7 @@
 package com.casemd6_be.controller;
 
 import com.casemd6_be.model.Job;
+import com.casemd6_be.model.query.ListJobCompanyAccount;
 import com.casemd6_be.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class JobAPI {
     @Autowired
     JobService jobService;
     @GetMapping("/showJob")
-    public ResponseEntity<List<Job>> getAllJob() {
+    public ResponseEntity<List<ListJobCompanyAccount>> getAllJob() {
        return new ResponseEntity<>(jobService.getAllJob(),HttpStatus.OK);
     }
 }
