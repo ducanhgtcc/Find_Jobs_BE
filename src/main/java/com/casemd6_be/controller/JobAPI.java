@@ -18,8 +18,4 @@ import java.util.List;
 public class JobAPI {
     @Autowired
     JobService jobService;
-    @GetMapping("/showJob")
-    public ResponseEntity<List<Job>> getAllJob() {
-       return new ResponseEntity<>(jobService.getAllJob(),HttpStatus.OK);
-    }
 }

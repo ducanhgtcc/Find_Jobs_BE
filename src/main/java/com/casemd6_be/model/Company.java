@@ -1,6 +1,5 @@
 package com.casemd6_be.model;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,9 +21,9 @@ public class Company {
 	private String googleMap;
 	private String website;
 
-	@OneToOne
+	@ManyToOne
 	private Account account;
 
-	@ManyToMany
-	private List<Category> category;
+//	@ManyToMany
+//	private List<Category> category;
 }
