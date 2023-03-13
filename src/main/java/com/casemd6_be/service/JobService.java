@@ -27,15 +27,19 @@ public class JobService {
     }
 
     public List<ListJobCompanyAccount> getAllJob_Latest() {
-        List<ListJobCompanyAccount> ListJob_Latest =  iJobRepo.joinCompanyAndJobAndAccount();
+        List<ListJobCompanyAccount> ListJob_Latest = iJobRepo.joinCompanyAndJobAndAccount();
         Collections.reverse(ListJob_Latest);
         return ListJob_Latest;
     }
+
     public ListJobCompanyAccount getOneJobbyID(int id) {
-       return iJobRepo.joinCompanyAndJobAndAccountbyid(id);
+        return iJobRepo.joinCompanyAndJobAndAccountbyid(id);
     }
-    public List<ListJobCompanyAccount> searchByCompany(String short_name){
+
+    public List<ListJobCompanyAccount> searchByCompany(String short_name) {
         return iJobRepo.searchByCompany(short_name);
 
     }
+
+
 }

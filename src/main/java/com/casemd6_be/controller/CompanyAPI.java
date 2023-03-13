@@ -52,4 +52,12 @@ public class CompanyAPI {
     public ResponseEntity<CompanyAndAccount> getAllJob(@PathVariable String email) {
         return new ResponseEntity<>(companyService.getAllCompany(email),HttpStatus.OK);
     }
+
+
+    @GetMapping("/businessUserDetails/{id}")
+    public ResponseEntity<ListJobCompanyAccount>getOneCompany(@PathVariable int id){
+        return new ResponseEntity<>(companyService.getOneCompany(id),HttpStatus.OK);
+    }
+
+
 }
