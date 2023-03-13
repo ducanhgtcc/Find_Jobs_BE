@@ -42,12 +42,13 @@ public class RegisterAPI {
             role.setId(account.getRole().getId());
             account.setRole(role);
             account.setAvatar("https://i.pinimg.com/236x/16/b2/e2/16b2e2579118bf6fba3b56523583117f.jpg");
+            account.setBanner("https://i.pinimg.com/236x/16/b2/e2/16b2e2579118bf6fba3b56523583117f.jpg");
             account.setStatus(false);
 
             sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản " + account.getName() + " đã được đăng kí." +
                     "Xin chờ hệ thống xác nhân từ 1 đến 2 ngày");
             accountService.save(account);
-            if (account.getRole().getId() == 3) {
+            if (account.getRole().getId() == 1) {
                 account.setId(account.getId());
                company.setAccount(account);
                 companyService.createCompany(company);
