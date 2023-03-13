@@ -3,6 +3,7 @@ package com.casemd6_be.service;
 import com.casemd6_be.model.Job;
 import com.casemd6_be.model.query.ListJobCompanyAccount;
 import com.casemd6_be.repository.IJobRepo;
+import com.casemd6_be.repository.IRoleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import java.util.List;
 public class JobService {
     @Autowired
     IJobRepo iJobRepo;
+    @Autowired
+    private IRoleRepo iRoleRepo;
 
     public List<ListJobCompanyAccount> getAllJobByEmail(String email) {
         return iJobRepo.joinCompanyAndJobAndAccountByEmail(email);
