@@ -50,4 +50,9 @@ public class JobAPI {
 
         return new ResponseEntity<>(jobService.searchByCompany('%'+short_name+'%'),HttpStatus.OK);
     }
+    @GetMapping("/guest")
+    public ResponseEntity<List<ListJobCompanyAccount>>getallbyGuest(){
+        return new ResponseEntity<>(jobService.getAllJob_Latest(),HttpStatus.OK);
+    }
+
 }
