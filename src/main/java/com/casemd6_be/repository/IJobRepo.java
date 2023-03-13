@@ -1,7 +1,12 @@
 package com.casemd6_be.repository;
 
 import com.casemd6_be.model.Job;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface IJobRepo extends CrudRepository<Job, Integer> {
+import java.util.List;
+
+public interface IJobRepo extends JpaRepository<Job, Integer> {
+
 }
