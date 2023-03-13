@@ -18,4 +18,6 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "join category on category.id = job.category_id\n" +
             "join location on location.id = job.location_id where email =:email")
     List<ListJobCompanyAccount> joinCompanyAndJobAndAccountByEmail(@Param("email") String email);
+
+    Job findJobsById(int id);
 }

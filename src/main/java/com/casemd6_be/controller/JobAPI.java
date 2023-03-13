@@ -16,8 +16,21 @@ import java.util.List;
 public class JobAPI {
     @Autowired
     JobService jobService;
+
     @GetMapping("/showJob/{email}")
-    public ResponseEntity<List<ListJobCompanyAccount>> getAllJob(@PathVariable String email) {
-       return new ResponseEntity<>(jobService.getAllJob(email),HttpStatus.OK);
+    public ResponseEntity<List<ListJobCompanyAccount>> getAllJobByEmail(@PathVariable String email) {
+       return new ResponseEntity<>(jobService.getAllJobByEmail(email),HttpStatus.OK);
+    }
+
+    @GetMapping("/block/{id}")
+    public ResponseEntity<Job> blockJobByEmail(@PathVariable int id) {
+        Job job = jobService.findJobById(id);
+        if (job.isStatus()) {
+            job.setStatus(false);
+        } else {
+            job.setStatus(true);
+        }
+        jobService.save(job);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

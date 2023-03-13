@@ -2,14 +2,19 @@ package com.casemd6_be.controller;
 
 import com.casemd6_be.model.Account;
 import com.casemd6_be.model.dto.AccountToken;
+import com.casemd6_be.model.query.ListJobCompanyAccount;
 import com.casemd6_be.service.AccountService;
 import com.casemd6_be.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -37,6 +42,11 @@ public class LoginAPI {
         String token = jwtService.createToken(authentication);
         Account account1 = accountService.findAccountByUsername(account.getEmail());
         return new AccountToken(account1.getId(), account1.getEmail(), account1.getRole(),token);
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<Account> findAccountByEmail(@PathVariable String email) {
+        return new ResponseEntity<>(accountService.findAccountByUsername(email), HttpStatus.OK);
     }
 }
 
