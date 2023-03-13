@@ -1,9 +1,6 @@
 package com.casemd6_be.model.query;
 
-import org.springframework.data.jpa.repository.Query;
-
 import java.util.Date;
-import java.util.List;
 
 public interface ListJobCompanyAccount {
     Integer getIdJob();
@@ -32,6 +29,9 @@ public interface ListJobCompanyAccount {
     String getStatusAcc();
     String getNameCategory();
     String getNameLocation();
+
+
+
 
 
 }

@@ -33,4 +33,21 @@ public class JobAPI {
         jobService.save(job);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    @GetMapping("/showJobNew")
+    public ResponseEntity<List<ListJobCompanyAccount>>getAllJob_Latest(){
+       return new ResponseEntity<>(jobService.getAllJob_Latest(),HttpStatus.OK);
+
+    }
+
+    @GetMapping("/showJobNew/{id}")
+    public ResponseEntity<ListJobCompanyAccount> getOneJob(@PathVariable int id){
+        return new ResponseEntity<>(jobService.getOneJobbyID(id),HttpStatus.OK);
+    }
+    @GetMapping("/searchCompany/{short_name}")
+    public ResponseEntity<List<ListJobCompanyAccount>> searchByCompany(@PathVariable String short_name ){
+
+        return new ResponseEntity<>(jobService.searchByCompany('%'+short_name+'%'),HttpStatus.OK);
+    }
 }
