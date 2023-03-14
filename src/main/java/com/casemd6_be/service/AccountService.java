@@ -46,5 +46,7 @@ public class AccountService implements UserDetailsService {
         roles.add(account.getRole());
         return new User(account.getEmail(), account.getPassword(), roles);
     }
+
+
 }
 
