@@ -41,4 +41,8 @@ public class JobService {
         return iJobRepo.searchByCompany(short_name);
 
     }
+
+    public List<ListJobCompanyAccount> getShowAllJob() {
+        return iJobRepo.joinCompanyAndJobAndAccount();
+    }
 }
