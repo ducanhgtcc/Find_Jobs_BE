@@ -125,4 +125,45 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "join category on category.id = job.category_id\n" +
             "join location on location.id = job.location_id where (title LIKE ?1 or account.address LIKE ?1) and category.id = ?2 and location.id = ?3 and job.status = true and expired_date >= now()")
     List<ListJobCompanyAccount> searchJobsByTitleAddressCategoryLocation(String key,int idCategory,int idLocation);
+
+    // Sort Job By Salary
+    @Query(nativeQuery = true,value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
+            "quantity,salary_min as min,salary_max as max,job.status as statusJob,title,company.code as codeCompany,google_map,number_of_employees,\n" +
+            "short_name,website,avatar,banner,account.description as descriptionAcc,email,account.name as nameAcc,phone,account.status as statusAcc,\n" +
+            "category.name as nameCategory, location.name as nameLocation\n" +
+            "from job join company on company.id = job.company_id\n" +
+            "join account on company.account_id=account.id\n" +
+            "join category on category.id = job.category_id\n" +
+            "join location on location.id = job.location_id where salary_min <=300 and salary_max <=300 and job.status = true and expired_date >= now()")
+    List<ListJobCompanyAccount> sortJobBySalaryMin();
+
+    @Query(nativeQuery = true,value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
+            "quantity,salary_min as min,salary_max as max,job.status as statusJob,title,company.code as codeCompany,google_map,number_of_employees,\n" +
+            "short_name,website,avatar,banner,account.description as descriptionAcc,email,account.name as nameAcc,phone,account.status as statusAcc,\n" +
+            "category.name as nameCategory, location.name as nameLocation\n" +
+            "from job join company on company.id = job.company_id\n" +
+            "join account on company.account_id=account.id\n" +
+            "join category on category.id = job.category_id\n" +
+            "join location on location.id = job.location_id where salary_min >300 and salary_min <=1000 and salary_max > 300 and salary_max <=1000 and job.status = true and expired_date >= now()")
+    List<ListJobCompanyAccount> sortJobBySalary1000();
+
+    @Query(nativeQuery = true,value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
+            "quantity,salary_min as min,salary_max as max,job.status as statusJob,title,company.code as codeCompany,google_map,number_of_employees,\n" +
+            "short_name,website,avatar,banner,account.description as descriptionAcc,email,account.name as nameAcc,phone,account.status as statusAcc,\n" +
+            "category.name as nameCategory, location.name as nameLocation\n" +
+            "from job join company on company.id = job.company_id\n" +
+            "join account on company.account_id=account.id\n" +
+            "join category on category.id = job.category_id\n" +
+            "join location on location.id = job.location_id where salary_min >1000 and salary_min <=2000 and salary_max > 1000 and salary_max <=2000 and job.status = true and expired_date >= now()")
+    List<ListJobCompanyAccount> sortJobBySalary2000();
+
+    @Query(nativeQuery = true,value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
+            "quantity,salary_min as min,salary_max as max,job.status as statusJob,title,company.code as codeCompany,google_map,number_of_employees,\n" +
+            "short_name,website,avatar,banner,account.description as descriptionAcc,email,account.name as nameAcc,phone,account.status as statusAcc,\n" +
+            "category.name as nameCategory, location.name as nameLocation\n" +
+            "from job join company on company.id = job.company_id\n" +
+            "join account on company.account_id=account.id\n" +
+            "join category on category.id = job.category_id\n" +
+            "join location on location.id = job.location_id where salary_min >1000 and salary_min <=2000 and salary_max > 1000 and salary_max <=2000 and job.status = true and expired_date >= now()")
+    List<ListJobCompanyAccount> sortJobBySalaryMax();
 }

@@ -67,4 +67,22 @@ public class JobService {
     public List<ListJobCompanyAccount> searchJobsByTitleAddressCategoryLocation(String key,int idCategory,int idLocation){
         return iJobRepo.searchJobsByTitleAddressCategoryLocation(key,idCategory,idLocation);
     }
+
+    //sort Job By Salary
+    public List<ListJobCompanyAccount> sortJobBySalaryMin(){
+        return iJobRepo.sortJobBySalaryMin();
+    }
+
+    public List<ListJobCompanyAccount> sortJobBySalary1000(){
+        return iJobRepo.sortJobBySalary1000();
+    }
+
+    public List<ListJobCompanyAccount> sortJobBySalary2000(){
+        return iJobRepo.sortJobBySalary2000();
+    }
+
+    public List<ListJobCompanyAccount> sortJobBySalaryMax(){
+        return iJobRepo.sortJobBySalaryMax();
+    }
+
 }

@@ -90,4 +90,24 @@ public class JobAPI {
         return new ResponseEntity<>(jobService.searchJobsByTitleAddressCategoryLocation('%' + key + '%',idCategory, idLocation), HttpStatus.OK);
     }
 
+    //sort Job By Salary
+    @GetMapping("/sortJobBySalaryMin")
+    public ResponseEntity<List<ListJobCompanyAccount>> sortJobBySalaryMin() {
+        return new ResponseEntity<>(jobService.sortJobBySalaryMin(), HttpStatus.OK);
+    }
+
+    @GetMapping("/sortJobBySalary1000")
+    public ResponseEntity<List<ListJobCompanyAccount>> sortJobBySalary1000() {
+        return new ResponseEntity<>(jobService.sortJobBySalary1000(), HttpStatus.OK);
+    }
+
+    @GetMapping("/sortJobBySalary2000")
+    public ResponseEntity<List<ListJobCompanyAccount>> sortJobBySalary2000() {
+        return new ResponseEntity<>(jobService.sortJobBySalary2000(), HttpStatus.OK);
+    }
+
+    @GetMapping("/sortJobBySalaryMax")
+    public ResponseEntity<List<ListJobCompanyAccount>> sortJobBySalaryMax() {
+        return new ResponseEntity<>(jobService.sortJobBySalaryMax(), HttpStatus.OK);
+    }
 }
