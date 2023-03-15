@@ -48,6 +48,7 @@ public class JobAPI {
     }
     @GetMapping("/searchCompany/{short_name}")
     public ResponseEntity<List<ListJobCompanyAccount>> searchByCompany(@PathVariable String short_name ){
+
         return new ResponseEntity<>(jobService.searchByCompany('%'+short_name+'%'),HttpStatus.OK);
     }
 
@@ -60,4 +61,9 @@ public class JobAPI {
     public ResponseEntity<List<ListTopCompany>> getTopCompany() {
         return new ResponseEntity<>(jobService.gettopCompany(), HttpStatus.OK);
     }
+    @GetMapping("/guest")
+    public ResponseEntity<List<ListJobCompanyAccount>>getallbyGuest(){
+        return new ResponseEntity<>(jobService.getAllJob_Latest(),HttpStatus.OK);
+    }
+
 }

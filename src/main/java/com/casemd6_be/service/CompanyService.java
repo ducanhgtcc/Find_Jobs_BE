@@ -28,6 +28,9 @@ public class CompanyService {
     public CompanyAndAccount getAllCompany(String email) {
         return iCompanyRepo.joinCompanyAndAccountByEmail(email);
     }
+    public ListJobCompanyAccount getOneCompany(int id){
+        return iCompanyRepo.joinCompanyAndJobAndAccountbyid(id);
+    }
 
 
 }

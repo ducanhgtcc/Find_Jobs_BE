@@ -3,13 +3,18 @@ package com.casemd6_be.controller;
 import com.casemd6_be.model.Account;
 import com.casemd6_be.model.Company;
 import com.casemd6_be.model.Role;
+import com.casemd6_be.model.dto.UpImage;
 import com.casemd6_be.model.query.CompanyAndAccount;
 import com.casemd6_be.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 @RestController
@@ -30,6 +35,31 @@ public class AccountAPI {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     }
+    @GetMapping("/editUser/{email}")
+    public ResponseEntity<Account>finduserbyid(@PathVariable String email){
+        return new ResponseEntity<>(accountService.findAccountByUsername(email),HttpStatus.OK);
+    }
+
+    @PostMapping("/editUser")
+    private ResponseEntity<?>saveUser(@RequestBody Account account){
+        accountService.save(account);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+    @PostMapping("/upImg")
+    public UpImage upImg(@RequestParam MultipartFile fileImg) {
+        String nameImg = fileImg.getOriginalFilename();
+        try {
+            FileCopyUtils.copy(fileImg.getBytes(), new File("D:\\modul6\\FE2\\Find_Jobs_FE\\src\\assets\\img/" + nameImg));
+            return new UpImage("assets/img/" + nameImg) ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
 
 
 
