@@ -34,8 +34,37 @@ public class JobService {
     public ListJobCompanyAccount getOneJobbyID(int id) {
        return iJobRepo.joinCompanyAndJobAndAccountbyid(id);
     }
+
     public List<ListJobCompanyAccount> searchByCompany(String short_name){
         return iJobRepo.searchByCompany(short_name);
+    }
 
+    // 7 API search job
+    public List<ListJobCompanyAccount> searchJobsByTitleOrAddress(String key){
+        return iJobRepo.searchJobsByTitleOrAddress(key);
+    }
+
+
+    public List<ListJobCompanyAccount> searchJobsByNameCategory(int idCategory){
+        return iJobRepo.searchJobsByNameCategory(idCategory);
+    }
+    public List<ListJobCompanyAccount> searchJobsByNameLocation(int idLocation){
+        return iJobRepo.searchJobsByNameLocation(idLocation);
+    }
+
+    public List<ListJobCompanyAccount> searchJobsByTitleAndAddressAndCategory(String key,int idCategory){
+        return iJobRepo.searchJobsByTitleAndAddressAndCategory(key,idCategory);
+    }
+
+    public List<ListJobCompanyAccount> searchJobsByTitleAndAddressAndLocation(String key,int idLocation){
+        return iJobRepo.searchJobsByTitleAndAddressAndLocation(key,idLocation);
+    }
+
+    public List<ListJobCompanyAccount> searchJobsByCategoryAndLocation(int idCategory,int idLocation){
+        return iJobRepo.searchJobsByCategoryAndLocation(idCategory,idLocation);
+    }
+
+    public List<ListJobCompanyAccount> searchJobsByTitleAddressCategoryLocation(String key,int idCategory,int idLocation){
+        return iJobRepo.searchJobsByTitleAddressCategoryLocation(key,idCategory,idLocation);
     }
 }

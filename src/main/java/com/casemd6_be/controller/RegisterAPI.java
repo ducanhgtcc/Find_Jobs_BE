@@ -43,15 +43,24 @@ public class RegisterAPI {
             account.setRole(role);
             account.setAvatar("https://i.pinimg.com/236x/16/b2/e2/16b2e2579118bf6fba3b56523583117f.jpg");
             account.setBanner("https://i.pinimg.com/236x/16/b2/e2/16b2e2579118bf6fba3b56523583117f.jpg");
-            account.setStatus(false);
+            if(account.getRole().getId() == 2){
+                account.setStatus(true);
+                accountService.save(account);
+                sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản " + account.getName() + " đã được đăng kí." +
+                        "Tài khoản : " + account.getEmail()+ ", Mật khẩu : " + account.getPassword());
+            }
 
-            sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản " + account.getName() + " đã được đăng kí." +
-                    "Xin chờ hệ thống xác nhân từ 1 đến 2 ngày");
-            accountService.save(account);
             if (account.getRole().getId() == 1) {
                 account.setId(account.getId());
-               company.setAccount(account);
+                account.setStatus(false);
+                accountService.save(account);
+                sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản " + account.getName() + " đã được đăng kí." +
+                        "Tài khoản : " + account.getEmail()+ ", Mật khẩu : " + account.getPassword() +
+                        "Chưa thể đăng nhập !. " +
+                        "Xin chờ hệ thống kích hoạt");
+                company.setAccount(account);
                 companyService.createCompany(company);
+
             }
 
             return new ResponseEntity<>(HttpStatus.OK);
