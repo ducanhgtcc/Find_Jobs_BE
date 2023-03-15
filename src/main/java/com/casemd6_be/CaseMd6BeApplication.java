@@ -9,5 +9,4 @@ public class CaseMd6BeApplication {
     public static void main(String[] args) {
         SpringApplication.run(CaseMd6BeApplication.class, args);
     }
-
 }

@@ -2,7 +2,6 @@ package com.casemd6_be.controller;
 
 import com.casemd6_be.model.Account;
 import com.casemd6_be.model.dto.AccountToken;
-import com.casemd6_be.model.query.ListJobCompanyAccount;
 import com.casemd6_be.service.AccountService;
 import com.casemd6_be.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +29,15 @@ public class LoginAPI {
     AccountService accountService;
     @PostMapping
     public AccountToken login(@RequestBody Account account) {
-        // tạo ra 1 đối tượng xác thực
+        // Tạo ra 1 đối tượng xác thực
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(account.getEmail(), account.getPassword())
         );
-        // nơi chứa đối tượng đang đăng nhập
-        // truyền đối tượng đăng nhập vào securityContextHolder
+        // Nơi chứa đối tượng đang đăng nhập
+        // Truyền đối tượng đăng nhập vào securityContextHolder
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // tạo ra token
+        // Tạo ra token
         String token = jwtService.createToken(authentication);
         Account account1 = accountService.findAccountByUsername(account.getEmail());
         return new AccountToken(account1.getId(), account1.getEmail(), account1.getRole(),token);
@@ -49,4 +48,3 @@ public class LoginAPI {
         return new ResponseEntity<>(accountService.findAccountByUsername(email), HttpStatus.OK);
     }
 }
-

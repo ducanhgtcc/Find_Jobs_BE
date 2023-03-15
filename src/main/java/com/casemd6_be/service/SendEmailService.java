@@ -13,7 +13,6 @@ public class SendEmailService {
 
     public boolean sendMail(String toMail, String subject, String content){
         SimpleMailMessage message =new SimpleMailMessage();
-
         message.setFrom("chivang1997a@gmail.com");
         message.setTo(toMail);
         message.setSubject(subject);
@@ -21,10 +20,9 @@ public class SendEmailService {
         try {
             mailSender.send(message);
             return true;
-        }catch (MailException mailException){
+        } catch (MailException mailException){
             System.out.println("Error"+mailException.getMessage());
             return false;
         }
-
     }
 }

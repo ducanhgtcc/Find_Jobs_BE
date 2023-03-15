@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AccountService accountService;
 
-    //    quản lý việc xác thực
+    // Quản lý việc xác thực
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManager() throws Exception {
@@ -31,12 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     JwtAuthenticationFilter jwtAuthenticationFilter;
 
-
-    // phân quyền
+    // Phân quyền
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/**");
-        http.authorizeRequests().antMatchers( "/login","/company/**","/account/**","/login/**","/register","/register/**","/job/**").permitAll()
+        http.authorizeRequests().antMatchers( "/login","/company/**","/account/**","/login/**","/register",
+                        "/register/**","/job/**","/location","/category").permitAll()
                 .antMatchers("/").hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers("/").hasAnyAuthority("ROLE_USER")
                 .antMatchers("/").hasAnyAuthority("ROLE_COMPANY")
@@ -47,13 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
-
     }
 
-    // xắc thực
+    // Xác thực
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(accountService).passwordEncoder(NoOpPasswordEncoder.getInstance());
-
     }
 }

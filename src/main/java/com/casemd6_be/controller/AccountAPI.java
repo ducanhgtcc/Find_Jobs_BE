@@ -1,10 +1,7 @@
 package com.casemd6_be.controller;
 
 import com.casemd6_be.model.Account;
-import com.casemd6_be.model.Company;
-import com.casemd6_be.model.Role;
 import com.casemd6_be.model.dto.UpImage;
-import com.casemd6_be.model.query.CompanyAndAccount;
 import com.casemd6_be.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,10 +54,4 @@ public class AccountAPI {
         }
         return null;
     }
-
-
-
-
-
-
 }

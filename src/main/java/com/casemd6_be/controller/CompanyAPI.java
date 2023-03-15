@@ -1,12 +1,9 @@
 package com.casemd6_be.controller;
 
-import com.casemd6_be.model.Account;
 import com.casemd6_be.model.Company;
-import com.casemd6_be.model.Role;
 import com.casemd6_be.model.dto.UpImage;
 import com.casemd6_be.model.query.CompanyAndAccount;
 import com.casemd6_be.model.query.ListJobCompanyAccount;
-import com.casemd6_be.repository.ICompanyRepo;
 import com.casemd6_be.service.AccountService;
 import com.casemd6_be.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +28,7 @@ public class CompanyAPI {
     AccountService accountService;
 
     @PostMapping
-    public ResponseEntity<Company> editCompany(@RequestBody Company company){
+    public ResponseEntity<Company> editCompany(@RequestBody Company company) {
         companyService.createCompany(company);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -53,11 +50,13 @@ public class CompanyAPI {
         return new ResponseEntity<>(companyService.getAllCompany(email),HttpStatus.OK);
     }
 
-
     @GetMapping("/businessUserDetails/{id}")
-    public ResponseEntity<ListJobCompanyAccount>getOneCompany(@PathVariable int id){
+    public ResponseEntity<ListJobCompanyAccount>getOneCompany(@PathVariable int id) {
         return new ResponseEntity<>(companyService.getOneCompany(id),HttpStatus.OK);
     }
 
-
+    @GetMapping("/searchJobByTitleAndEmailOfCompany")
+    public ResponseEntity<List<ListJobCompanyAccount>> searchJobByTitleAndEmailOfCompany(@RequestParam(name = "email") String email,@RequestParam(name = "title") String title) {
+        return new ResponseEntity<>(companyService.searchJobByTitleAndEmailOfCompany(email,'%' + title + '%'),HttpStatus.OK);
+    }
 }
