@@ -2,6 +2,7 @@ package com.casemd6_be.repository;
 
 import com.casemd6_be.model.Job;
 import com.casemd6_be.model.query.ListJobCompanyAccount;
+import com.casemd6_be.model.query.ListTopCompany;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -55,4 +56,11 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
     List<ListJobCompanyAccount> joinCompanyAndJobAndAccountByEmail(@Param("email") String email);
 
     Job findJobsById(int id);
+
+    @Query(nativeQuery = true, value = "select company_id, short_name, avatar, sum(quantity) as sum_quantity from job \n" +
+            "left join company on company_id = company.id \n" +
+            "join account on account.id = company.account_id\n" +
+            "group by company_id order by sum(quantity) desc\n" +
+            "limit 6")
+    List<ListTopCompany> joinCompanyAndJobAndAccount1();
 }

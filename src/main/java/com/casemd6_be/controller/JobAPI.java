@@ -2,6 +2,7 @@ package com.casemd6_be.controller;
 
 import com.casemd6_be.model.Job;
 import com.casemd6_be.model.query.ListJobCompanyAccount;
+import com.casemd6_be.model.query.ListTopCompany;
 import com.casemd6_be.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,5 +54,10 @@ public class JobAPI {
     @GetMapping("/showAllJob")
     public ResponseEntity<List<ListJobCompanyAccount>> getAllJob() {
         return new ResponseEntity<>(jobService.getShowAllJob(), HttpStatus.OK);
+    }
+
+    @GetMapping("/showTopCompany")
+    public ResponseEntity<List<ListTopCompany>> getTopCompany() {
+        return new ResponseEntity<>(jobService.gettopCompany(), HttpStatus.OK);
     }
 }
