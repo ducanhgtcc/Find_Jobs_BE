@@ -32,4 +32,7 @@ public class CompanyService {
     public List<CompanyAndAccount> getallCompanyNoEamil(){
         return iCompanyRepo.joinCompanyAndAccount();
     }
+    public List<CompanyAndAccount> searchBynameCompany(String name){
+        return iCompanyRepo.searchBynameCompany(name);
+    }
 }

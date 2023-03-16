@@ -45,5 +45,13 @@ public class AccountService implements UserDetailsService {
     public Account findbyid(int id){
         return iAccountRepo.findAccountById(id);
     }
+
+    public List<Account> getallAccountEqual2(){
+        return iAccountRepo.listAccountIdRoleEqual2();
+    }
+    public List<Account> searchUserByName(String name){
+        return iAccountRepo.searchAccountRoleEqual2(name);
+    }
 }
+
 
