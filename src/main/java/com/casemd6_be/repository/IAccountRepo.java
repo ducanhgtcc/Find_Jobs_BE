@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface IAccountRepo extends CrudRepository<Account, Integer> {
     Account findAccountByEmail(String email);
     Account findAccountsByPhone(String phone);
+    Account findAccountById(int id);
 
     // edit Account
 //    @Modifying

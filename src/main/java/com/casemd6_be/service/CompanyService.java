@@ -28,4 +28,8 @@ public class CompanyService {
     public List<ListJobCompanyAccount> searchJobByTitleAndEmailOfCompany(String email,String key){
         return iCompanyRepo.searchJobByTitleAndEmailOfCompany(email,key);
     }
+
+    public List<CompanyAndAccount> getallCompanyNoEamil(){
+        return iCompanyRepo.joinCompanyAndAccount();
+    }
 }
