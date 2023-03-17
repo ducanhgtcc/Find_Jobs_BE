@@ -55,12 +55,24 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
 
     Job findJobsById(int id);
 
+    // Hien thi Job User
     @Query(nativeQuery = true, value = "select company_id, short_name, avatar, sum(quantity) as sum_quantity from job \n" +
             "left join company on company_id = company.id \n" +
             "join account on account.id = company.account_id\n" +
             "group by company_id order by sum(quantity) desc\n" +
             "limit 6")
     List<ListTopCompany> joinCompanyAndJobAndAccount1();
+
+    // Hien thi Job Admin, Hien thi, khoa Job Admin
+    @Query(nativeQuery = true, value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
+            "quantity,salary_min as min,salary_max as max,job.status as statusJob,title,company.code as codeCompany,google_map,number_of_employees,\n" +
+            "short_name,website,avatar,banner,account.description as descriptionAcc,email,account.name as nameAcc,phone,account.status as statusAcc,\n" +
+            "category.name as nameCategory, location.name as nameLocation\n" +
+            "from job join company on company.id = job.company_id\n" +
+            "join account on company.account_id=account.id\n" +
+            "join category on category.id = job.category_id\n" +
+            "join location on location.id = job.location_id where Job.status = 1 or Job.status = 2;")
+    List<ListJobCompanyAccount> joinCompanyAndJobAndAccount2();
 
     // 7 API Search job
 

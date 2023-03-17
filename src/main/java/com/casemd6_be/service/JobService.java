@@ -70,8 +70,14 @@ public class JobService {
         return iJobRepo.searchJobsByTitleAddressCategoryLocation(key, idCategory, idLocation);
     }
 
+    // Hien thi Job User
     public List<ListJobCompanyAccount> getShowAllJob() {
         return iJobRepo.joinCompanyAndJobAndAccount();
+    }
+
+    // Hien thi Job Admin
+    public List<ListJobCompanyAccount> getAdminJob() {
+        return iJobRepo.joinCompanyAndJobAndAccount2();
     }
 
     public List<ListTopCompany> gettopCompany() {
