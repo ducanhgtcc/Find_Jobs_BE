@@ -1,5 +1,6 @@
 package com.casemd6_be.repository;
 
+import com.casemd6_be.model.Account;
 import com.casemd6_be.model.Company;
 import com.casemd6_be.model.query.CompanyAndAccount;
 import com.casemd6_be.model.query.ListJobCompanyAccount;
@@ -42,4 +43,10 @@ public interface ICompanyRepo extends CrudRepository<Company, Integer> {
             "company.id as idCompany, code,google_map,number_of_employees as quantity,short_name,website\n" +
             "from account join company on company.account_id= account.id\n" )
    List<CompanyAndAccount>  joinCompanyAndAccount();
+    @Query(nativeQuery = true,value = "select account.id as idAccount,address,avatar,banner,description,email,name,password,phone,status,role_id as role,\n" +
+            "            company.id as idCompany, code,google_map,number_of_employees as quantity,short_name,website\n" +
+            "          from account join company on company.account_id= account.id where account.name like :name")
+    List<CompanyAndAccount> searchBynameCompany(@PathParam("name") String name);
+
+
 }
