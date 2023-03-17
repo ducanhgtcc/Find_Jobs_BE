@@ -18,6 +18,7 @@ public class JobAPI {
     @Autowired
     JobService jobService;
 
+
     @GetMapping("/showJob/{email}")
     public ResponseEntity<List<ListJobCompanyAccount>> getAllJobByEmail(@PathVariable String email) {
        return new ResponseEntity<>(jobService.getAllJobByEmail(email),HttpStatus.OK);

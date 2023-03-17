@@ -14,7 +14,7 @@ public class ApplyJob {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private boolean status;
+	private int status;
 	private String message;
 	private String cv;
 

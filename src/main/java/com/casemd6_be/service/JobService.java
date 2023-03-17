@@ -1,19 +1,64 @@
 package com.casemd6_be.service;
 
+import com.casemd6_be.CaseMd6BeApplication;
 import com.casemd6_be.model.Job;
+//import com.casemd6_be.config.MyTimerTask;
 import com.casemd6_be.model.query.ListJobCompanyAccount;
 import com.casemd6_be.model.query.ListTopCompany;
 import com.casemd6_be.repository.IJobRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+
 
 @Service
-public class JobService {
+public class JobService{
     @Autowired
     IJobRepo iJobRepo;
+
+    public List<Job> findAll(){
+        return (List<Job>) iJobRepo.findAll();
+    }
+
+//    Logger logger = LoggerFactory.getLogger(CaseMd6BeApplication.class);
+//    @Scheduled(cron = "0 32 17 * * ?")
+//    public void lockExpiredJobs() {
+//        List<Job> jobs = (List<Job>) iJobRepo.findAll();
+//        for (Job job : jobs) {
+//            if (new Date().after(job.getExpiredDate())) {
+//                job.setStatus(3);
+//            }
+//        }
+////        logger.info(lockExpiredJobs());
+//
+//    }
+
+//    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+//    // set thời gian hết hạn bài đăng  // Chạy lúc 6 giờ sáng mỗi ngày
+//    @Scheduled(cron = "0 10 10 * * ?")
+//    public void lockExpiredJobs() {
+//        List<Job> jobs = (List<Job>) iJobRepo.findAll();
+//
+//        MyTimerTask timerTask = new MyTimerTask() {
+//            @Override
+//            public void run() {
+//                for (Job job : jobs) {
+//                    if (new Date().after(job.getExpiredDate())) {
+//                        job.setStatus(3);
+//                    }
+//                }
+//
+//            }
+//        };
+//
+//        Timer timer = new Timer();
+//        timer.schedule(timerTask, 0, 5000);
+//    }
+
 
     public List<ListJobCompanyAccount> getAllJobByEmail(String email) {
         return iJobRepo.joinCompanyAndJobAndAccountByEmail(email);
@@ -100,4 +145,6 @@ public class JobService {
     public List<ListJobCompanyAccount> sortJobBySalaryMax() {
         return iJobRepo.sortJobBySalaryMax();
     }
+
+
 }
