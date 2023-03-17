@@ -17,6 +17,7 @@ public class ApplyJob {
 	private int status;
 	private String message;
 	private String cv;
+	private int count;
 
 	@ManyToOne
 	private Job job;

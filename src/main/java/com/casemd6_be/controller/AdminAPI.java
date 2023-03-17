@@ -33,13 +33,13 @@ public class AdminAPI {
         Job job =  jobService.findJobById(id);
         int value = 2;  //Khóa
         int value2 = 1; // Mở
-        if (job.getStatus() == 1) {
-            job.setStatus(value);
+        if (job.getStatus() == 2 || job.getStatus() == 0) {
+            job.setStatus(value2);
             jobService.save(job);
 
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            job.setStatus(value2);
+            job.setStatus(value);
             jobService.save(job);
             return new ResponseEntity<>(HttpStatus.OK);
         }

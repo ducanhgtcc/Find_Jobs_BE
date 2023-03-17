@@ -27,10 +27,13 @@ public class JobAPI {
     @GetMapping("/block/{id}")
     public ResponseEntity<Job> blockJobByEmail(@PathVariable int id) {
         Job job = jobService.findJobById(id);
-        if (job.getStatus() == 0) {
-            job.setStatus(1);
-        } else {
+        if (job.getStatus() == 1) {
             job.setStatus(0);
+        } else if(job.getStatus() == 2){
+            job.setStatus(2);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else if(job.getStatus() == 0){
+            job.setStatus(1);
         }
         jobService.save(job);
         return new ResponseEntity<>(HttpStatus.OK);

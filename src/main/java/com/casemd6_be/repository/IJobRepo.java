@@ -19,7 +19,7 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "from job join company on company.id = job.company_id\n" +
             "join account on company.account_id=account.id\n" +
             "join category on category.id = job.category_id\n" +
-            "join location on location.id = job.location_id where Job.status = 1;")
+            "join location on location.id = job.location_id where Job.status = 1 and expired_date >= now()")
     List<ListJobCompanyAccount> joinCompanyAndJobAndAccount();
 
     @Query(nativeQuery = true, value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
@@ -29,7 +29,7 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "from job join company on company.id = job.company_id\n" +
             "join account on company.account_id=account.id\n" +
             "join category on category.id = job.category_id\n" +
-            "join location on location.id = job.location_id where Job.id=:id")
+            "join location on location.id = job.location_id where Job.id=:id and job.status = 1 and expired_date >= now()")
     ListJobCompanyAccount joinCompanyAndJobAndAccountbyid(@PathParam("id") int id);
 
     @Query(nativeQuery = true, value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
@@ -50,7 +50,7 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "from job join company on company.id = job.company_id\n" +
             "join account on company.account_id=account.id\n" +
             "join category on category.id = job.category_id\n" +
-            "join location on location.id = job.location_id where email =:email")
+            "join location on location.id = job.location_id where email =:email and (Job.status = 1 or Job.status = 2 or job.status = 0) and expired_date >= now()")
     List<ListJobCompanyAccount> joinCompanyAndJobAndAccountByEmail(@Param("email") String email);
 
     Job findJobsById(int id);
@@ -71,7 +71,7 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "from job join company on company.id = job.company_id\n" +
             "join account on company.account_id=account.id\n" +
             "join category on category.id = job.category_id\n" +
-            "join location on location.id = job.location_id where Job.status = 1 or Job.status = 2;")
+            "join location on location.id = job.location_id where (Job.status = 1 or Job.status = 2 or job.status = 0) and expired_date >= now()")
     List<ListJobCompanyAccount> joinCompanyAndJobAndAccount2();
 
     // 7 API Search job
