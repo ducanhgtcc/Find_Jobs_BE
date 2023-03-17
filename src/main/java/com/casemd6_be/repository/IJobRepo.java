@@ -186,4 +186,6 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "join category on category.id = job.category_id\n" +
             "join location on location.id = job.location_id where salary_min >1000 and salary_min <=2000 and salary_max > 1000 and salary_max <=2000 and job.status = 1 and expired_date >= now()")
     List<ListJobCompanyAccount> sortJobBySalaryMax();
+
+
 }

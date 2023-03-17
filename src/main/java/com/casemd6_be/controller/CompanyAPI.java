@@ -59,4 +59,6 @@ public class CompanyAPI {
     public ResponseEntity<List<ListJobCompanyAccount>> searchJobByTitleAndEmailOfCompany(@RequestParam(name = "email") String email,@RequestParam(name = "title") String title) {
         return new ResponseEntity<>(companyService.searchJobByTitleAndEmailOfCompany(email,'%' + title + '%'),HttpStatus.OK);
     }
+
+
 }

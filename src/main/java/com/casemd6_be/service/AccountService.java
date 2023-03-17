@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountService implements UserDetailsService {
@@ -40,6 +41,9 @@ public class AccountService implements UserDetailsService {
         List<Role> roles = new ArrayList<>();
         roles.add(account.getRole());
         return new User(account.getEmail(), account.getPassword(), roles);
+    }
+    public Account findbyid(int id){
+        return iAccountRepo.findAccountById(id);
     }
 }
 

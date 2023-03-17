@@ -38,11 +38,8 @@ public interface ICompanyRepo extends CrudRepository<Company, Integer> {
             "join location on location.id = job.location_id where email = ?1 and title like ?2 ")
     List<ListJobCompanyAccount> searchJobByTitleAndEmailOfCompany(String email,String title);
 
-    // edit Company
-//    @Modifying
-//    @Transactional
-//    @Query(nativeQuery = true, value = "UPDATE company join account on company.account_id=account.id SET google_map=:map, number_of_employees=:number_of_employees,short_name=:short_name,website=:website WHERE email =:email ")
-//    void editCompany(@Param("map") String map, @Param("number_of_employees") int number_of_employees, @Param("short_name") String short_name, @Param("website") String website, @Param("email") String email);
-//
-
+    @Query(nativeQuery = true,value = "select account.id as idAccount,address,avatar,banner,description,email,name,password,phone,status,role_id as role,\n" +
+            "company.id as idCompany, code,google_map,number_of_employees as quantity,short_name,website\n" +
+            "from account join company on company.account_id= account.id\n" )
+   List<CompanyAndAccount>  joinCompanyAndAccount();
 }
