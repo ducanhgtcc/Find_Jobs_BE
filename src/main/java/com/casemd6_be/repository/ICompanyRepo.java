@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface ICompanyRepo extends CrudRepository<Company, Integer> {
 
-    @Query(nativeQuery = true,value = "select account.id as idAccount,address,avatar,banner,description,email,name,password,phone,status,role_id as role,\n" +
+    @Query(nativeQuery = true, value = "select account.id as idAccount,address,avatar,banner,description,email,name,password,phone,status,role_id as role,\n" +
             "company.id as idCompany, code,google_map,number_of_employees as quantity,short_name,website\n" +
             "from account join company on company.account_id= account.id\n" +
             "where email =:email")
@@ -29,7 +29,7 @@ public interface ICompanyRepo extends CrudRepository<Company, Integer> {
             "join location on location.id = job.location_id where Job.id=:id")
     ListJobCompanyAccount joinCompanyAndJobAndAccountbyid(@PathParam("id") int id);
 
-    @Query(nativeQuery = true,value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
+    @Query(nativeQuery = true, value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
             "quantity,salary_min as min,salary_max as max,job.status as statusJob,title,company.code as codeCompany,google_map,number_of_employees,\n" +
             "short_name,website,avatar,banner,account.description as descriptionAcc,email,account.name as nameAcc,phone,account.status as statusAcc,\n" +
             "category.name as nameCategory, location.name as nameLocation\n" +
@@ -37,16 +37,20 @@ public interface ICompanyRepo extends CrudRepository<Company, Integer> {
             "join account on company.account_id=account.id\n" +
             "join category on category.id = job.category_id\n" +
             "join location on location.id = job.location_id where email = ?1 and title like ?2 ")
-    List<ListJobCompanyAccount> searchJobByTitleAndEmailOfCompany(String email,String title);
+    List<ListJobCompanyAccount> searchJobByTitleAndEmailOfCompany(String email, String title);
 
-    @Query(nativeQuery = true,value = "select account.id as idAccount,address,avatar,banner,description,email,name,password,phone,status,role_id as role,\n" +
+    @Query(nativeQuery = true, value = "select account.id as idAccount,address,avatar,banner,description,email,name,password,phone,status,role_id as role,\n" +
             "company.id as idCompany, code,google_map,number_of_employees as quantity,short_name,website\n" +
-            "from account join company on company.account_id= account.id\n" )
-   List<CompanyAndAccount>  joinCompanyAndAccount();
-    @Query(nativeQuery = true,value = "select account.id as idAccount,address,avatar,banner,description,email,name,password,phone,status,role_id as role,\n" +
+            "from account join company on company.account_id= account.id\n")
+    List<CompanyAndAccount> joinCompanyAndAccount();
+
+    @Query(nativeQuery = true, value = "select account.id as idAccount,address,avatar,banner,description,email,name,password,phone,status,role_id as role,\n" +
             "            company.id as idCompany, code,google_map,number_of_employees as quantity,short_name,website\n" +
             "          from account join company on company.account_id= account.id where account.name like :name")
     List<CompanyAndAccount> searchBynameCompany(@PathParam("name") String name);
 
-
+    @Query(nativeQuery = true, value = "select account.id as idAccount,address,avatar,banner,description,email,name,password,phone,status,role_id as role,\n" +
+            "            company.id as idCompany, code,google_map,number_of_employees as quantity,short_name,website\n" +
+            "            from account join company on company.account_id= account.id limit 3;")
+    List<CompanyAndAccount>getallCompanylimit3();
 }

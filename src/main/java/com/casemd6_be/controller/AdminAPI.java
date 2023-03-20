@@ -11,6 +11,7 @@ import com.casemd6_be.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,12 @@ import java.util.List;
 public class AdminAPI {
     @Autowired
     JobService jobService;
+    @Autowired
+    CompanyService companyService;
+    @Autowired
+    AccountService accountService;
+    @Autowired
+    SendEmailService sendEmailService;
 
     // Admin Job, Active, blog Job
     @GetMapping("/showAdminJob")
@@ -45,12 +52,7 @@ public class AdminAPI {
         }
     }
 
-    @Autowired
-    CompanyService companyService;
-    @Autowired
-    AccountService accountService;
-    @Autowired
-    SendEmailService sendEmailService;
+
 
     @GetMapping("/ShowCompanyAdmin")
     public ResponseEntity<List<CompanyAndAccount>> getallCompanyNoEamil() {
@@ -116,5 +118,17 @@ public class AdminAPI {
     @GetMapping("/searchCompany/{name}")
     public ResponseEntity<List<CompanyAndAccount>> searchCompanyByName(@PathVariable String name) {
         return new ResponseEntity<>(companyService.searchBynameCompany('%' + name + '%'), HttpStatus.OK);
+    }
+    @GetMapping("/adminCompany")
+    public ResponseEntity<List<CompanyAndAccount>> getallCompanylimit3(){
+        return new ResponseEntity<>(companyService.getallLimit3(),HttpStatus.OK);
+    }
+    @GetMapping("/adminUser")
+    public ResponseEntity<List<Account>> getallUserlimit3(){
+        return new ResponseEntity<>(accountService.getallAccountEqual2limit3(),HttpStatus.OK);
+    }
+    @GetMapping("/AdminJob")
+    public ResponseEntity<List<ListJobCompanyAccount>> getAdminJoblimit3() {
+        return new ResponseEntity<>(jobService.getAdminJoblimt3(), HttpStatus.OK);
     }
 }

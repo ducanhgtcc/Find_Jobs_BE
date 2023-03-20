@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class JobService{
+public class JobService {
     @Autowired
     IJobRepo iJobRepo;
 
-    public List<Job> findAll(){
+    public List<Job> findAll() {
         return (List<Job>) iJobRepo.findAll();
     }
 
@@ -102,5 +102,9 @@ public class JobService{
 
     public List<ListJobCompanyAccount> sortJobBySalaryMax() {
         return iJobRepo.sortJobBySalaryMax();
+    }
+
+    public List<ListJobCompanyAccount> getAdminJoblimt3() {
+        return iJobRepo.joinCompanyAndJobAndAccount2limit3();
     }
 }

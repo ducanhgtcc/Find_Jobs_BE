@@ -52,6 +52,9 @@ public class AccountService implements UserDetailsService {
     public List<Account> searchUserByName(String name){
         return iAccountRepo.searchAccountRoleEqual2(name);
     }
+    public List<Account> getallAccountEqual2limit3(){
+        return iAccountRepo.listAccountIdRoleEqual2limit3();
+    }
 }
 
 

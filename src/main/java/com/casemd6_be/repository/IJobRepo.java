@@ -186,4 +186,13 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "join category on category.id = job.category_id\n" +
             "join location on location.id = job.location_id where salary_min >1000 and salary_min <=2000 and salary_max > 1000 and salary_max <=2000 and job.status = 1 and expired_date >= now()")
     List<ListJobCompanyAccount> sortJobBySalaryMax();
+    @Query(nativeQuery = true, value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
+            "            quantity,salary_min as min,salary_max as max,job.status as statusJob,title,company.code as codeCompany,google_map,number_of_employees,\n" +
+            "            short_name,website,avatar,banner,account.description as descriptionAcc,email,account.name as nameAcc,phone,account.status as statusAcc,\n" +
+            "            category.name as nameCategory, location.name as nameLocation\n" +
+            "            from job join company on company.id = job.company_id\n" +
+            "            join account on company.account_id=account.id \n" +
+            "            join category on category.id = job.category_id \n" +
+            "            join location on location.id = job.location_id  where (Job.status = 1 or Job.status = 2 or job.status = 0) and expired_date >= now() limit 3  ;")
+    List<ListJobCompanyAccount> joinCompanyAndJobAndAccount2limit3();
 }

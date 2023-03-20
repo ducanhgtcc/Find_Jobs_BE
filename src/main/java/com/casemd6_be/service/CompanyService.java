@@ -35,4 +35,7 @@ public class CompanyService {
     public List<CompanyAndAccount> searchBynameCompany(String name){
         return iCompanyRepo.searchBynameCompany(name);
     }
+    public List<CompanyAndAccount>getallLimit3(){
+        return this.iCompanyRepo.getallCompanylimit3();
+    }
 }
