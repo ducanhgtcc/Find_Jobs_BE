@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -35,18 +34,6 @@ public class JobAPI {
     public ResponseEntity<List<ListJobCompanyAccount>> getAllJobByEmail(@PathVariable String email) {
         return new ResponseEntity<>(jobService.getAllJobByEmail(email), HttpStatus.OK);
     }
-
-//    @GetMapping("/block/{id}")
-//    public ResponseEntity<Job> blockJobByEmail(@PathVariable int id) {
-//        Job job = jobService.findJobById(id);
-//        if (job.isStatus()) {
-//            job.setStatus(false);
-//        } else {
-//            job.setStatus(true);
-//        }
-//        jobService.save(job);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 
     @GetMapping("/showJobNew")
     public ResponseEntity<List<ListJobCompanyAccount>> getAllJob_Latest() {
