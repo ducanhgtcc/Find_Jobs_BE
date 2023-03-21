@@ -41,7 +41,7 @@ public class ApplyJobAPI {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // tìm tất cả các job của 1 ng dùng đã apply
+    // Tìm tất cả các job của một người dùng đã apply
     @GetMapping("/account/{id}")
     public ResponseEntity<List<ApplyJob>> findApplyJobByAccount(@PathVariable int id) {
         return new ResponseEntity<>(applyJobService.findApplyJobByAccount(id), HttpStatus.OK);

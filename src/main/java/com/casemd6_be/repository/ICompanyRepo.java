@@ -1,6 +1,5 @@
 package com.casemd6_be.repository;
 
-import com.casemd6_be.model.Account;
 import com.casemd6_be.model.Company;
 import com.casemd6_be.model.query.CompanyAndAccount;
 import com.casemd6_be.model.query.ListJobCompanyAccount;

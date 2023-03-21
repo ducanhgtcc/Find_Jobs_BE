@@ -13,8 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/login")
@@ -27,6 +25,7 @@ public class LoginAPI {
 
     @Autowired
     AccountService accountService;
+
     @PostMapping
     public AccountToken login(@RequestBody Account account) {
         // Tạo ra 1 đối tượng xác thực

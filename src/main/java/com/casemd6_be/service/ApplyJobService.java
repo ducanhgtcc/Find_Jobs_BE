@@ -29,7 +29,7 @@ public class ApplyJobService {
         iApplyJobRepo.deleteById(id);
     }
 
-    // tìm tất cả các job của 1 ng dùng đã apply
+    // Tìm tất cả các job của một người dùng đã apply
     public List<ApplyJob> findApplyJobByAccount(int id) {
         return iApplyJobRepo.findApplyJobByAccount_Id(id);
     }
