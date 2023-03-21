@@ -12,6 +12,8 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 public interface IJobRepo extends CrudRepository<Job, Integer> {
+    List<Job> findJobsByCompanyId(Long id);
+
     @Query(nativeQuery = true, value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
             "quantity,salary_min as min,salary_max as max,job.status as statusJob,title,company.code as codeCompany,google_map,number_of_employees,\n" +
             "short_name,website,avatar,banner,account.description as descriptionAcc,email,account.name as nameAcc,phone,account.status as statusAcc,\n" +
@@ -53,7 +55,7 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "join location on location.id = job.location_id where email =:email and (Job.status = 1 or Job.status = 2 or job.status = 0) and expired_date >= now()")
     List<ListJobCompanyAccount> joinCompanyAndJobAndAccountByEmail(@Param("email") String email);
 
-    Job findJobsById(int id);
+    Job findJobsById(Integer id);
 
     // Hien thi Job User
     @Query(nativeQuery = true, value = "select company_id, short_name, avatar, sum(quantity) as sum_quantity from job \n" +

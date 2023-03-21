@@ -38,4 +38,9 @@ public class CompanyService {
     public List<CompanyAndAccount>getallLimit3(){
         return this.iCompanyRepo.getallCompanylimit3();
     }
+
+
+    public Company findOne(int id) {
+        return iCompanyRepo.findById(id).get();
+    }
 }

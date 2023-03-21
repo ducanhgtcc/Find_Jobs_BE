@@ -107,4 +107,12 @@ public class JobService {
     public List<ListJobCompanyAccount> getAdminJoblimt3() {
         return iJobRepo.joinCompanyAndJobAndAccount2limit3();
     }
+
+    public Job findById(Integer id) {
+        return iJobRepo.findById(id).get();
+    }
+
+    public List<Job> findAllJobsInCompanyId(Long id) {
+        return iJobRepo.findJobsByCompanyId(id);
+    }
 }

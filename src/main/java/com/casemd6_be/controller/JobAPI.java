@@ -1,9 +1,16 @@
 package com.casemd6_be.controller;
 
+import com.casemd6_be.model.Category;
+import com.casemd6_be.model.Company;
 import com.casemd6_be.model.Job;
+import com.casemd6_be.model.Location;
+import com.casemd6_be.model.query.CompanyAndAccount;
 import com.casemd6_be.model.query.ListJobCompanyAccount;
 import com.casemd6_be.model.query.ListTopCompany;
+import com.casemd6_be.service.CategoryService;
+import com.casemd6_be.service.CompanyService;
 import com.casemd6_be.service.JobService;
+import com.casemd6_be.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +24,12 @@ import java.util.List;
 public class JobAPI {
     @Autowired
     JobService jobService;
+    @Autowired
+    CompanyService companyService;
+    @Autowired
+    CategoryService categoryService;
+    @Autowired
+    LocationService locationService;
 
     @GetMapping("/showJob/{email}")
     public ResponseEntity<List<ListJobCompanyAccount>> getAllJobByEmail(@PathVariable String email) {
@@ -124,5 +137,43 @@ public class JobAPI {
     @GetMapping("/sortJobBySalaryMax")
     public ResponseEntity<List<ListJobCompanyAccount>> sortJobBySalaryMax() {
         return new ResponseEntity<>(jobService.sortJobBySalaryMax(), HttpStatus.OK);
+    }
+
+    @PostMapping("/{email}")
+    public ResponseEntity<Job> creatJob(@RequestBody Job job,@PathVariable String email) {
+        CompanyAndAccount company = companyService.getAllCompany(email);
+        Company company1 = companyService.findOne(company.getIdCompany());
+        jobService.save(job);
+        String code = company.getCode();
+        job.setCode("CODE" + code + job.getId());
+        job.setCompany(company1);
+        job.setStatus(1);
+        jobService.save(job);
+        return new ResponseEntity<>(job, HttpStatus.CREATED);
+    }
+
+    @PostMapping()
+    public ResponseEntity<Job> editJob(@RequestBody Job job) {
+        jobService.save(job);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/category")
+    public ResponseEntity<List<Category>> getAllCategory() {
+        return new ResponseEntity<>(categoryService.getAllCategory(), HttpStatus.OK);
+    }
+
+    @GetMapping("/location")
+    public ResponseEntity<List<Location>> getAllLocation() {
+        return new ResponseEntity<>(locationService.getAllLocation(), HttpStatus.OK);
+    }
+
+    @GetMapping("/quantity/{idCompany}")
+    public ResponseEntity<Iterable<Job>> findAllJobsInCompany(@PathVariable Long idCompany) {
+        return new ResponseEntity<>(jobService.findAllJobsInCompanyId(idCompany), HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Job> findJobById(@PathVariable Integer id) {
+        return new ResponseEntity<>(jobService.findById(id), HttpStatus.OK);
     }
 }
