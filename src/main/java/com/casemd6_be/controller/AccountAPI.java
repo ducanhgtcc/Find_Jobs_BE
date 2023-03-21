@@ -47,11 +47,16 @@ public class AccountAPI {
     public UpImage upImg(@RequestParam MultipartFile fileImg) {
         String nameImg = fileImg.getOriginalFilename();
         try {
-            FileCopyUtils.copy(fileImg.getBytes(), new File("D:\\modul6\\FE2\\Find_Jobs_FE\\src\\assets\\img/" + nameImg));
+            FileCopyUtils.copy(fileImg.getBytes(), new File("C:\\Users\\hungchivang\\Desktop\\Module 6\\find_jobs_FE\\src\\assets\\img/" + nameImg));
             return new UpImage("assets/img/" + nameImg) ;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @GetMapping("/show/{id}")
+    public ResponseEntity<Account>findAccountByID(@PathVariable int id){
+        return new ResponseEntity<>(accountService.findbyid(id),HttpStatus.OK);
     }
 }

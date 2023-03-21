@@ -1,6 +1,7 @@
 package com.casemd6_be.service;
 
 import com.casemd6_be.model.ApplyJob;
+import com.casemd6_be.model.query.ListApplyJob;
 import com.casemd6_be.repository.IApplyJobRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,20 +18,31 @@ public class ApplyJobService {
         return (List<ApplyJob>) iApplyJobRepo.findAll();
     }
 
-    public Optional<ApplyJob> findOneApplyJobById(int id) {
-        return iApplyJobRepo.findById(id);
+    public ApplyJob findOneApplyJobById(int idApply) {
+        return iApplyJobRepo.findApplyJobsById(idApply);
     }
 
     public void save(ApplyJob applyJob) {
         iApplyJobRepo.save(applyJob);
     }
 
-    public void delete(int id) {
-        iApplyJobRepo.deleteById(id);
-    }
 
     // tìm tất cả các job của 1 ng dùng đã apply
-    public List<ApplyJob> findApplyJobByAccount(int id) {
-        return iApplyJobRepo.findApplyJobByAccount_Id(id);
+    public List<ListApplyJob> showAllApplyJobByUser(String email) {
+        return iApplyJobRepo.showAllApplyJobByUser(email);
+    }
+
+    // tìm tất cả các job của công ty theo ứng viên
+    public List<ListApplyJob> showAllApplyJobOfUserByCompany(int idCompany) {
+        return iApplyJobRepo.showAllApplyJobOfUserByCompany(idCompany);
+    }
+
+    public ListApplyJob showApplyJobOfUserByCompanyCV(int idApply) {
+        return iApplyJobRepo.showApplyJobOfUserByCompanyCV(idApply);
+    }
+
+    // tìm kiếm các job theo tên ng dùng, tiêu đề, mã công việc
+    public List<ListApplyJob> searchApplyJobsWithUser(String key,int idCompany) {
+        return iApplyJobRepo.searchApplyJobsWithUser(key,idCompany);
     }
 }
