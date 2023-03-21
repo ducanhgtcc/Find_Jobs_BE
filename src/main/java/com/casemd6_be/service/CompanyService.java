@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyService {
     @Autowired
-    ICompanyRepo iCompanyRepo;
+   private ICompanyRepo iCompanyRepo;
 
 
     public void createCompany(Company company) {
@@ -28,6 +29,8 @@ public class CompanyService {
     public CompanyAndAccount getAllCompany(String email) {
         return iCompanyRepo.joinCompanyAndAccountByEmail(email);
     }
-
+    public Company findOne(int id) {
+        return iCompanyRepo.findById(id).get();
+    }
 
 }

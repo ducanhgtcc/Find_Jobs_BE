@@ -13,7 +13,7 @@ public interface ListJobCompanyAccount {
     Integer getQuantity();
     Double getMin();
     Double getMax();
-    Boolean getStatusJob();
+    Integer getStatusJob();
     String getTitle();
     String getCodeCompany();
     String getGoogle_map();

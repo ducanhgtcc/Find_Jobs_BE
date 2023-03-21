@@ -2,6 +2,7 @@ package com.casemd6_be.service;
 
 import com.casemd6_be.model.Account;
 import com.casemd6_be.model.Role;
+import com.casemd6_be.model.query.ListJobCompanyAccount;
 import com.casemd6_be.repository.IAccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,6 @@ public class AccountService implements UserDetailsService {
     public Account findAccountByPhone(String phone) {
         return iAccountRepo.findAccountsByPhone(phone);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

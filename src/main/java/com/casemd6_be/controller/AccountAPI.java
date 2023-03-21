@@ -19,6 +19,7 @@ public class AccountAPI {
     @Autowired
     AccountService accountService;
 
+    @GetMapping("")
     @PostMapping
     public ResponseEntity<Account> editAccount(@RequestBody Account account){
         Account account1 = accountService.findAccountByUsername(account.getEmail());

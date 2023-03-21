@@ -25,7 +25,7 @@ public class Job {
     private String description;
     private int quantity;
     private String gender;
-    private boolean status;
+    private int status;
 
     @ManyToOne
     private Location location;
