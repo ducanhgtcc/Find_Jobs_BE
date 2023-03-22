@@ -27,19 +27,24 @@ public class LoginAPI {
     AccountService accountService;
 
     @PostMapping
-    public AccountToken login(@RequestBody Account account) {
-        // Tạo ra 1 đối tượng xác thực
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(account.getEmail(), account.getPassword())
-        );
-        // Nơi chứa đối tượng đang đăng nhập
-        // Truyền đối tượng đăng nhập vào securityContextHolder
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+    public ResponseEntity<AccountToken> login(@RequestBody Account account) {
+        Account checkAccount = accountService.findAccountByEmailAndPassword(account.getEmail(), account.getPassword());
+        if(checkAccount != null){
+            // Tạo ra 1 đối tượng xác thực
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(account.getEmail(), account.getPassword())
+            );
+            // Nơi chứa đối tượng đang đăng nhập
+            // Truyền đối tượng đăng nhập vào securityContextHolder
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Tạo ra token
-        String token = jwtService.createToken(authentication);
-        Account account1 = accountService.findAccountByUsername(account.getEmail());
-        return new AccountToken(account1.getId(), account1.getEmail(), account1.getRole(),token);
+            // Tạo ra token
+            String token = jwtService.createToken(authentication);
+            Account account1 = accountService.findAccountByUsername(account.getEmail());
+            return new ResponseEntity<>(new AccountToken(account1.getId(), account1.getEmail(), account1.getRole(),token),HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/{email}")

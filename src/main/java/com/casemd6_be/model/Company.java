@@ -22,7 +22,4 @@ public class Company {
 
 	@ManyToOne
 	private Account account;
-
-//	@ManyToMany
-//	private List<Category> category;
 }

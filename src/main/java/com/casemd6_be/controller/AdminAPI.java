@@ -64,16 +64,16 @@ public class AdminAPI {
         if (account.getStatus() == true) {
             account.setStatus(value);
             accountService.save(account);
-            sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã bị khóa bởi hệ thống vui lòng liên hệ tổng đài 19006868 để được hỗ trợ !");
+            sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã bị khóa bởi hệ thống vui lòng liên hệ tổng đài 19006868 để được hỗ trợ!");
 
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             account.setStatus(value2);
             accountService.save(account);
-            sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã được mở khóa " +
+            sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã được mở khóa!" +
                     "Tài khoản: " + account.getEmail() + ", Mật khẩu: " + account.getPassword() +
-                    "Bạn đã có thể đăng nhập !. " +
-                    "Chào mừng bạn trở lại ");
+                    "Bạn đã có thể đăng nhập! " +
+                    "Chào mừng bạn trở lại");
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
@@ -91,16 +91,16 @@ public class AdminAPI {
         if (account.getStatus() == true) {
             account.setStatus(value);
             accountService.save(account);
-            sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã bị khóa bởi hệ thống vui lòng liên hệ tổng đài 19006868 để được hỗ trợ !");
+            sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã bị khóa bởi hệ thống vui lòng liên hệ tổng đài 19006868 để được hỗ trợ!");
 
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             account.setStatus(value2);
             accountService.save(account);
-            sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã được mở khóa " +
+            sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã được mở khóa!" +
                     "Tài khoản: " + account.getEmail() + ", Mật khẩu: " + account.getPassword() +
-                    "Bạn đã có thể đăng nhập !. " +
-                    "Chào mừng bạn trở lại ");
+                    "Bạn đã có thể đăng nhập! " +
+                    "Chào mừng bạn trở lại!");
 
             return new ResponseEntity<>(HttpStatus.OK);
         }

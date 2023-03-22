@@ -37,7 +37,7 @@ public class CompanyAPI {
     public UpImage upImg(@RequestParam MultipartFile fileImg) {
         String nameImg = fileImg.getOriginalFilename();
         try {
-            FileCopyUtils.copy(fileImg.getBytes(), new File("E:\\CASE MODULE 6\\Find_Jobs_FE\\src\\assets\\img/" + nameImg));
+            FileCopyUtils.copy(fileImg.getBytes(), new File("E:\\CASE MODULE 6\\Find_Jobs_FE\\src\\assets\\img\\" + nameImg));
             return new UpImage("assets/img/" + nameImg) ;
         } catch (IOException e) {
             e.printStackTrace();

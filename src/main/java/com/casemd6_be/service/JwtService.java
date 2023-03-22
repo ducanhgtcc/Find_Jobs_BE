@@ -15,9 +15,9 @@ public class JwtService {
     private static final long EXPIRE_TIME = 86400000000L;
     // Hàm tạo ra token
     public String createToken(Authentication authentication) {
-        // Lấy đối tượng đang đăng nhập.
+    // Lấy đối tượng đang đăng nhập
         User user = (User) authentication.getPrincipal();
-        // Dữ liệu truyền vào token
+    // Dữ liệu truyền vào token
         return Jwts.builder()
                 .setSubject((user.getUsername()))
                 .setIssuedAt(new Date())

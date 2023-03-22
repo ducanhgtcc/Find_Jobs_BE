@@ -30,8 +30,8 @@ public class AccountAPI {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
     }
+
     @GetMapping("/editUser/{email}")
     public ResponseEntity<Account>finduserbyid(@PathVariable String email){
         return new ResponseEntity<>(accountService.findAccountByUsername(email),HttpStatus.OK);
@@ -41,17 +41,22 @@ public class AccountAPI {
     private ResponseEntity<?>saveUser(@RequestBody Account account){
         accountService.save(account);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
+
     @PostMapping("/upImg")
     public UpImage upImg(@RequestParam MultipartFile fileImg) {
         String nameImg = fileImg.getOriginalFilename();
         try {
-            FileCopyUtils.copy(fileImg.getBytes(), new File("D:\\modul6\\FE2\\Find_Jobs_FE\\src\\assets\\img/" + nameImg));
+            FileCopyUtils.copy(fileImg.getBytes(), new File("E:\\CASE MODULE 6\\Find_Jobs_FE\\src\\assets\\img\\" + nameImg));
             return new UpImage("assets/img/" + nameImg) ;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @GetMapping("/show/{id}")
+    public ResponseEntity<Account>findAccountByID(@PathVariable int id){
+        return new ResponseEntity<>(accountService.findbyid(id),HttpStatus.OK);
     }
 }

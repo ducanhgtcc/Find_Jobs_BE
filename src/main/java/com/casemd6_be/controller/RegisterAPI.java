@@ -37,16 +37,16 @@ public class RegisterAPI {
         Role role = new Role();
         Company company = new Company();
 
-        if (accountService.findAccountByUsername(account.getEmail()) == null ||
+        if (accountService.findAccountByUsername(account.getEmail()) == null &&
                 accountService.findAccountByPhone(account.getPhone()) == null) {
             role.setId(account.getRole().getId());
             account.setRole(role);
             account.setAvatar("https://i.pinimg.com/236x/16/b2/e2/16b2e2579118bf6fba3b56523583117f.jpg");
             account.setBanner("https://i.pinimg.com/236x/16/b2/e2/16b2e2579118bf6fba3b56523583117f.jpg");
-            if(account.getRole().getId() == 2){
+            if (account.getRole().getId() == 2) {
                 account.setStatus(true);
                 accountService.save(account);
-                sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã được đăng kí." +
+                sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã được đăng kí!" +
                         "Tài khoản: " + account.getEmail() + ", Mật khẩu: " + account.getPassword());
             }
 
@@ -54,14 +54,13 @@ public class RegisterAPI {
                 account.setId(account.getId());
                 account.setStatus(false);
                 accountService.save(account);
-                sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã được đăng kí." +
+                sendEmailService.sendMail(account.getEmail(), "Thông báo", "Tài khoản: " + account.getName() + " đã được đăng kí!" +
                         "Tài khoản: " + account.getEmail() + ", Mật khẩu: " + account.getPassword() +
-                        "Chưa thể đăng nhập !. " +
+                        "Tài khoản chưa thể đăng nhập! " +
                         "Xin chờ hệ thống kích hoạt");
                 company.setAccount(account);
                 companyService.createCompany(company);
             }
-
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

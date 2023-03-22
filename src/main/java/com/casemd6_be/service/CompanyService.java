@@ -21,6 +21,7 @@ public class CompanyService {
     public CompanyAndAccount getAllCompany(String email) {
         return iCompanyRepo.joinCompanyAndAccountByEmail(email);
     }
+
     public ListJobCompanyAccount getOneCompany(int id){
         return iCompanyRepo.joinCompanyAndJobAndAccountbyid(id);
     }
@@ -32,13 +33,14 @@ public class CompanyService {
     public List<CompanyAndAccount> getallCompanyNoEamil(){
         return iCompanyRepo.joinCompanyAndAccount();
     }
+
     public List<CompanyAndAccount> searchBynameCompany(String name){
         return iCompanyRepo.searchBynameCompany(name);
     }
-    public List<CompanyAndAccount>getallLimit3(){
+
+    public List<CompanyAndAccount> getallLimit3(){
         return this.iCompanyRepo.getallCompanylimit3();
     }
-
 
     public Company findOne(int id) {
         return iCompanyRepo.findById(id).get();
