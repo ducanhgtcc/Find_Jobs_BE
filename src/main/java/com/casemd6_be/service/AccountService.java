@@ -31,6 +31,10 @@ public class AccountService implements UserDetailsService {
         return iAccountRepo.findAccountByEmail(email);
     }
 
+    public Account findAccountByEmailAndPassword(String email,String password) {
+        return iAccountRepo.findAccountByEmailAndPassword(email,password);
+    }
+
     public Account findAccountByPhone(String phone) {
         return iAccountRepo.findAccountsByPhone(phone);
     }

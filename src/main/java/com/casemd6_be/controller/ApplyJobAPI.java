@@ -4,6 +4,7 @@ import com.casemd6_be.model.Account;
 import com.casemd6_be.model.ApplyJob;
 import com.casemd6_be.model.Job;
 import com.casemd6_be.model.dto.UpImage;
+import com.casemd6_be.model.query.CheckQuantityApplyJob;
 import com.casemd6_be.model.query.ListApplyJob;
 import com.casemd6_be.model.query.ListJobCompanyAccount;
 import com.casemd6_be.service.AccountService;
@@ -56,14 +57,22 @@ public class ApplyJobAPI {
     @PostMapping
     public ResponseEntity<ApplyJob> applyJobUser(@RequestBody ApplyJob applyJob,@RequestParam(name = "email") String email,@RequestParam(name = "idJob") int idJob) {
         Account account = accountService.findAccountByUsername(email);
+        List<ApplyJob> applyJobList = applyJobService.findAllApplyJob();
+
         account.setId(account.getId());
         applyJob.setAccount(account);
-
         Job job = new Job();
         job.setId(idJob);
         applyJob.setJob(job);
-        applyJob.setCount(0);
+        int a = applyJob.getAccount().getId();
+        int b = applyJob.getJob().getId();
 
+        for (int i = 0; i < applyJobList.size(); i++) {
+            if(a == applyJobList.get(i).getAccount().getId() && b == applyJobList.get(i).getJob().getId()){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        applyJob.setCount(0);
         applyJob.setStatus(1);
         applyJob.setMessage("Đang chờ duyệt");
 
@@ -119,17 +128,19 @@ public class ApplyJobAPI {
     @PostMapping("/confirmRecruitOfCompany")
     public ResponseEntity<ApplyJob> confirmRecruitOfCompany(@RequestBody ApplyJob applyJob) {
         ApplyJob applyJob1 = applyJobService.findOneApplyJobById(applyJob.getId());
-
         Account account = accountService.findbyid(applyJob1.getAccount().getId());
         ListJobCompanyAccount job = jobService.getOneJobbyID(applyJob1.getJob().getId());
-
-        applyJob1.setCount(1);
-        applyJob1.setMessage("Xin chúc mừng bạn đã được nhận");
-        applyJobService.save(applyJob1);
-        sendEmailService.sendMail(account.getEmail(), "Thông báo từ doanh nghiệp : " + job.getNameAcc(),
-                "Xin chào : " +account.getName()+ "; " +
-                        "Chúc mừng bạn đã trúng tuyển");
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        CheckQuantityApplyJob checkQuantityApplyJob = applyJobService.checkQuantityApplyJob(applyJob1.getJob().getId());
+        if(checkQuantityApplyJob.getCountJob() < checkQuantityApplyJob.getQuantity()){
+            applyJob1.setCount(1);
+            applyJob1.setMessage("Xin chúc mừng bạn đã được nhận");
+            applyJobService.save(applyJob1);
+            sendEmailService.sendMail(account.getEmail(), "Thông báo từ doanh nghiệp : " + job.getNameAcc(),
+                    "Xin chào : " +account.getName()+ "; " +
+                            "Chúc mừng bạn đã trúng tuyển");
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     // xác nhận không tuyển từ công ty
@@ -189,4 +200,5 @@ public class ApplyJobAPI {
     public ResponseEntity<List<ListApplyJob>> searchApplyJobsWithUser(@RequestParam(name = "key") String key,@RequestParam(name = "idCompany")  int idCompany) {
         return new ResponseEntity<>(applyJobService.searchApplyJobsWithUser('%' + key + '%',idCompany), HttpStatus.OK);
     }
+
 }

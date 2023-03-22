@@ -37,7 +37,7 @@ public class RegisterAPI {
         Role role = new Role();
         Company company = new Company();
 
-        if (accountService.findAccountByUsername(account.getEmail()) == null ||
+        if (accountService.findAccountByUsername(account.getEmail()) == null &&
                 accountService.findAccountByPhone(account.getPhone()) == null) {
             role.setId(account.getRole().getId());
             account.setRole(role);

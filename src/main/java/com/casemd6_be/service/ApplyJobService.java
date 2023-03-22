@@ -1,6 +1,7 @@
 package com.casemd6_be.service;
 
 import com.casemd6_be.model.ApplyJob;
+import com.casemd6_be.model.query.CheckQuantityApplyJob;
 import com.casemd6_be.model.query.ListApplyJob;
 import com.casemd6_be.repository.IApplyJobRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +46,10 @@ public class ApplyJobService {
     public List<ListApplyJob> searchApplyJobsWithUser(String key,int idCompany) {
         return iApplyJobRepo.searchApplyJobsWithUser(key,idCompany);
     }
+
+    //check số lượng ứng veeen mà doanh nghiệp đã tuyển
+    public CheckQuantityApplyJob checkQuantityApplyJob(int idJob) {
+        return iApplyJobRepo.checkQuantityApplyJob(idJob);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.casemd6_be.repository;
 
 import com.casemd6_be.model.ApplyJob;
+import com.casemd6_be.model.query.CheckQuantityApplyJob;
 import com.casemd6_be.model.query.ListApplyJob;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -53,4 +54,9 @@ public interface IApplyJobRepo extends CrudRepository<ApplyJob, Integer> {
             "            join company on company.id = job.company_id \n" +
             "            join role on role.id = account.role_id WHERE (role.id = 2 and company.id=?2) and  (account.name like ?1 or title like ?1 or job.code like ?1)")
     List<ListApplyJob> searchApplyJobsWithUser(String key,int idCompany);
+
+    //check số lượng ứng veeen mà doanh nghiệp đã tuyển
+    @Query(nativeQuery = true,value = "SELECT job_id as idJob,sum(count) as countJob,quantity from apply_job join job on job.id = apply_job.job_id\n" +
+            "where job_id = ?1 and (count =1 or count =0) GROUP BY job_id")
+    CheckQuantityApplyJob checkQuantityApplyJob(int idJob);
 }
