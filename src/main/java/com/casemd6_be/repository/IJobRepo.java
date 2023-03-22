@@ -156,7 +156,7 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "from job join company on company.id = job.company_id\n" +
             "join account on company.account_id=account.id\n" +
             "join category on category.id = job.category_id\n" +
-            "join location on location.id = job.location_id where salary_min <=300 and salary_max <=300 and job.status = 1 and expired_date >= now()")
+            "join location on location.id = job.location_id where salary_min <=500 and salary_max <=500 and job.status = 1 and expired_date >= now()")
     List<ListJobCompanyAccount> sortJobBySalaryMin();
 
     @Query(nativeQuery = true,value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
@@ -166,7 +166,7 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "from job join company on company.id = job.company_id\n" +
             "join account on company.account_id=account.id\n" +
             "join category on category.id = job.category_id\n" +
-            "join location on location.id = job.location_id where salary_min >300 and salary_min <=1000 and salary_max > 300 and salary_max <=1000 and job.status = 1 and expired_date >= now()")
+            "join location on location.id = job.location_id where salary_min >500 and salary_min <=1000 and salary_max > 500 and salary_max <=1000 and job.status = 1 and expired_date >= now()")
     List<ListJobCompanyAccount> sortJobBySalary1000();
 
     @Query(nativeQuery = true,value = "select job.id as idJob,account.address ,job.code as codeJob,job.description as descriptionJob,exp_year, expired_date,gender,\n" +
@@ -197,4 +197,7 @@ public interface IJobRepo extends CrudRepository<Job, Integer> {
             "join category on category.id = job.category_id \n" +
             "join location on location.id = job.location_id  where (Job.status = 1 or Job.status = 2 or job.status = 0) and expired_date >= now() limit 3  ;")
     List<ListJobCompanyAccount> joinCompanyAndJobAndAccount2limit3();
+
+    @Query(nativeQuery = true, value = "SELECT * from job ORDER BY id desc limit 1")
+    Job findJobForCreateCodeJob();
 }

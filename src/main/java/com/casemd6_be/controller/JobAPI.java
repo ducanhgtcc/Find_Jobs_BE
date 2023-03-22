@@ -143,9 +143,11 @@ public class JobAPI {
     public ResponseEntity<Job> creatJob(@RequestBody Job job,@PathVariable String email) {
         CompanyAndAccount company = companyService.getAllCompany(email);
         Company company1 = companyService.findOne(company.getIdCompany());
-        jobService.save(job);
+
+        Job FindJobById = jobService.findJobForCreateCodeJob();
+
         String code = company.getCode();
-        job.setCode("CODE" + code + job.getId());
+        job.setCode("CODE" + code + (FindJobById.getId()+1));
         job.setCompany(company1);
         job.setStatus(1);
         jobService.save(job);
@@ -176,4 +178,6 @@ public class JobAPI {
     public ResponseEntity<Job> findJobById(@PathVariable Integer id) {
         return new ResponseEntity<>(jobService.findById(id), HttpStatus.OK);
     }
+
+
 }

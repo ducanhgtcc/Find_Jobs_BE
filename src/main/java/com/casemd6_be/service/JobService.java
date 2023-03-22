@@ -115,4 +115,9 @@ public class JobService {
     public List<Job> findAllJobsInCompanyId(Long id) {
         return iJobRepo.findJobsByCompanyId(id);
     }
+
+    // lấy vị trí cuối cùng của mảng job
+    public Job findJobForCreateCodeJob() {
+        return iJobRepo.findJobForCreateCodeJob();
+    }
 }
